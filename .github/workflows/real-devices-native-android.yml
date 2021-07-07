@@ -22,9 +22,9 @@ jobs:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       run: mvn test -Dtest=AndroidNativeAppTest -X
-    - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
-        with:
-          name: screenshot
-          path: Screenshot.png
-          retention-days: 5
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshot
+        path: Screenshot.png
+        retention-days: 5
