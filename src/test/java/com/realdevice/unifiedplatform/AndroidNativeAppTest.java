@@ -14,6 +14,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -74,6 +75,7 @@ public class AndroidNativeAppTest {
 
     @Test
     public void shouldOpenApp() throws IOException {
+        PageFactory.initElements(driver, this);
         WebDriverWait wait = new WebDriverWait(getDriver(), 10000);
         WebElement loginField = wait.until(ExpectedConditions.visibilityOf(userName));
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
