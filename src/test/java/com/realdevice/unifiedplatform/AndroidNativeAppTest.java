@@ -14,7 +14,6 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -69,15 +68,11 @@ public class AndroidNativeAppTest {
         resultReportingTestWatcher.setDriver(driver);
     }
 
-    @AndroidFindBy(id = "test-Username")
-    @iOSXCUITFindBy(id = "ad")
-    MobileElement userName;
-
     @Test
     public void shouldOpenApp() throws IOException {
-        PageFactory.initElements(driver, this);
+        Page page = new Page(driver);
         WebDriverWait wait = new WebDriverWait(getDriver(), 10000);
-        WebElement loginField = wait.until(ExpectedConditions.visibilityOf(userName));
+        WebElement loginField = wait.until(ExpectedConditions.visibilityOf(page.userName));
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("Screenshot.png"));
         assertTrue(loginField.isDisplayed());
