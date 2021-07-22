@@ -1,11 +1,10 @@
 package com.realdevice.unifiedplatform;
 
-import com.realdevice.unifiedplatform.SauceTestWatcher;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
@@ -69,10 +68,14 @@ public class AndroidNativeAppTest {
         resultReportingTestWatcher.setDriver(driver);
     }
 
+    @AndroidFindBy(id = "test-Username")
+    @iOSXCUITFindBy(id = "ad")
+    MobileElement userName;
+
     @Test
     public void shouldOpenApp() throws IOException {
         WebDriverWait wait = new WebDriverWait(getDriver(), 10000);
-        WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("test-Username")));
+        WebElement loginField = wait.until(ExpectedConditions.visibilityOf(userName));
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("Screenshot.png"));
         assertTrue(loginField.isDisplayed());
